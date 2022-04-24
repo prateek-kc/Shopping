@@ -3,13 +3,13 @@
     <nav>
 
         <div class="nav-left">
-            <h1>Shopping</h1>
+            <RouterLink to="/Home"><h1>Shopping</h1> </RouterLink>
         </div>
 
-        <div class="nav-right">
-            <RouterLink to="/Wishlist">Wishlist</RouterLink>
-            <RouterLink to="/Cart">Cart</RouterLink>
-            <RouterLink to="/Login">Logout</RouterLink>
+        <div class="nav-right" v-if="ready">
+            <RouterLink to="/Wishlist"><font-awesome-icon icon="heart"  /></RouterLink>
+            <RouterLink to="/Cart"><font-awesome-icon icon="cart-shopping"  /></RouterLink>
+            <RouterLink to="/" @click="handleClick">Logout</RouterLink>
         </div>
 
     </nav>
@@ -17,10 +17,26 @@
 </template>
 
 <script lang="ts">
-import  { defineComponent } from "vue";
+import router from "@/router";
+import  { defineComponent , ref} from "vue";
 
 export default  defineComponent({
     name:'Navbar',
+    setup(){
+        let ready = ref<boolean>(false);
+        let loggedin = localStorage.getItem('isLoggedIn');
+
+        if(loggedin === 'true'){
+            ready.value=true
+        }
+        
+        function handleClick(){
+            localStorage.setItem('isLoggedIn','false');
+            router.replace('/')
+            ready.value=false;
+        }
+        return {handleClick,ready};  
+    }
 
 })
 </script>
@@ -54,6 +70,11 @@ nav{
 
 .nav-left{
     margin-left: 20px;
+}
+
+.nav-left a{
+    text-decoration: none;
+    color: black;
 }
 
 </style>

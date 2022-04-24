@@ -2,7 +2,7 @@
 
 <div class="home-container">
      <div v-for="item in shopdata" :key="item">
-        <Card :shopdata="shopdata" />
+        <Card :item="item" />
     </div>
 </div>
 
@@ -24,7 +24,6 @@ export default defineComponent({
             fetch('http://localhost:4000/products')
             .then(res => res.json())
             .then(data =>{
-
                 shopdata.value = data;
                 ready.value=true;
             })
@@ -39,7 +38,7 @@ export default defineComponent({
     width: 100%;
     height: auto;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     flex-wrap: wrap;
     padding: 20px;
 }
