@@ -92,7 +92,11 @@ export default defineComponent({
     padding: 20px;
     display: flex;
     flex-direction: column;
-     background-color: lightgrey;
+     background-color: #ef7917;
+}
+
+.card-container:hover{
+    transform: scale(1.2);
 }
 .card-top{
     display: flex;

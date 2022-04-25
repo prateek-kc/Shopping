@@ -68,7 +68,7 @@ export default defineComponent({
     align-items: center;
     padding: 20px;
     border-radius:10px ;
-    background-color: lightgrey;
+    background-color: #ef7917;
 }
 .product-details-left{
     width: 20%;

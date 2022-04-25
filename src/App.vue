@@ -33,6 +33,7 @@ export default defineComponent({
 body{
   margin: 0;
   padding: 0;
+  background-color: wheat;
 }
 main{
   width: 70%;

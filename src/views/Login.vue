@@ -104,11 +104,11 @@ form{
     justify-content: center;
     align-items: center;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    background-color: lightgrey;
+    background-color: #ef7917;
     border-radius: 10px;
 }
 .error{
-    color:red;
+    color:black;
     font-weight: bold;
 }
 .field{

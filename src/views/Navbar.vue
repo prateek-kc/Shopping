@@ -42,6 +42,7 @@ nav{
     justify-content: space-between;
     align-items: center;
     padding: 20px;
+    background-color: #6200ee;
 }
 .nav-right{
     display: flex;
@@ -53,13 +54,15 @@ nav{
 }
 .nav-right a{
     text-decoration: none;
-    color: black;
+   color: white;
+   font-weight: bold;
 }
 .nav-left{
     margin-left: 20px;
+    color: white;
 }
 .nav-left a{
     text-decoration: none;
-    color: black;
+    color: white;
 }
 </style>
