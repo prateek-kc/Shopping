@@ -1,19 +1,17 @@
 <template>
-
     <nav>
-
-        <div class="nav-left">
+        <div class="nav-left" v-if="ready">
             <RouterLink to="/Home"><h1>Shopping</h1> </RouterLink>
         </div>
-
+        <div v-else class="nav-left">
+            <h1>Shopping</h1>
+        </div>
         <div class="nav-right" v-if="ready">
             <RouterLink to="/Wishlist"><font-awesome-icon icon="heart"  /></RouterLink>
             <RouterLink to="/Cart"><font-awesome-icon icon="cart-shopping"  /></RouterLink>
             <RouterLink to="/" @click="handleClick">Logout</RouterLink>
         </div>
-
     </nav>
-  
 </template>
 
 <script lang="ts">
@@ -22,27 +20,19 @@ import  { defineComponent , ref} from "vue";
 
 export default  defineComponent({
     name:'Navbar',
-    setup(){
-        let ready = ref<boolean>(false);
-        let loggedin = localStorage.getItem('isLoggedIn');
-
-        if(loggedin === 'true'){
-            ready.value=true
-        }
-        
+    props:['ready'],
+    setup(props,context){
         function handleClick(){
             localStorage.setItem('isLoggedIn','false');
+            context.emit('logout');
             router.replace('/')
-            ready.value=false;
         }
-        return {handleClick,ready};  
+        return {handleClick};  
     }
-
 })
 </script>
 
 <style>
-
 nav{
     height: 50px;
     border-bottom-left-radius:30px ;
@@ -53,7 +43,6 @@ nav{
     align-items: center;
     padding: 20px;
 }
-
 .nav-right{
     display: flex;
     justify-content: space-around;
@@ -62,19 +51,15 @@ nav{
     font-size: 20px;
     text-decoration: none;
 }
-
 .nav-right a{
     text-decoration: none;
     color: black;
 }
-
 .nav-left{
     margin-left: 20px;
 }
-
 .nav-left a{
     text-decoration: none;
     color: black;
 }
-
 </style>

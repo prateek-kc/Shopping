@@ -5,15 +5,27 @@ import Navbar from './views/Navbar.vue'
 export default defineComponent({
     name: "App",
     setup() {
+      let ready = ref<boolean>(false);
+      let loggedin = localStorage.getItem('isLoggedIn');
+      if(loggedin === 'true'){
+          ready.value=true
+      }
+     function handleLogin(){
+       ready.value=true;
+     }
+     function handleLogout(){
+       ready.value=false;
+     }
+     return {handleLogin,ready,handleLogout}
     },
     components: { Navbar }
 })
 </script>
 
 <template>
-  <Navbar />
+  <Navbar :ready="ready" @logout="handleLogout" />
   <main>
-    <RouterView />
+    <RouterView @login="handleLogin"/>
   </main>
 </template>
 

@@ -4,6 +4,9 @@
      <div v-for="item in shopdata" :key="item">
         <Card :item="item" />
     </div>
+    <div v-if="err">
+        <h2> {{err}} </h2>
+    </div>
 </div>
 
 </template>
@@ -18,17 +21,23 @@ export default defineComponent({
     components:{Login,Card},
     setup(){
         let shopdata=ref<any[]>([]);
-        let ready= ref<boolean>(false);
-
+        let err = ref<string>('');
         onMounted(() =>{
-            fetch('http://localhost:4000/products')
-            .then(res => res.json())
-            .then(data =>{
-                shopdata.value = data;
-                ready.value=true;
-            })
+                fetch('http://localhost:4000/products')
+                .then(res =>{
+                    if(res.ok){
+                        return res.json();
+                    }
+                    throw new Error(res.statusText);
+                })
+                .then(data =>{
+                    shopdata.value = data;
+                })
+               .catch(error =>{
+                   err.value=error
+               })
         })
-        return {shopdata,ready}
+        return {shopdata,err}
     }
 })
 </script>
@@ -36,7 +45,7 @@ export default defineComponent({
 <style scoped>
 .home-container{
     width: 100%;
-    height: auto;
+    height: 100%;
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;

@@ -92,6 +92,7 @@ export default defineComponent({
     padding: 20px;
     display: flex;
     flex-direction: column;
+     background-color: lightgrey;
 }
 .card-top{
     display: flex;

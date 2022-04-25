@@ -1,6 +1,5 @@
 <template>
 <div class="product-details-container">
-
     <div class="product-detail" v-if="ready">
         <div class="product-details-left">
             <h1>{{product.name}}</h1>
@@ -10,14 +9,15 @@
             <span>Category: {{product.category}}</span>
         </div>
     </div>
-
+    <div v-if="err" class="error">
+        <h2> {{err}} </h2>
+    </div>
 </div>
-  
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted , ref} from "vue"
-import { useRoute, useRouter } from "vue-router"
+import { defineComponent,ref} from "vue"
+import { useRoute } from "vue-router"
 
 export default defineComponent({
     name:"ProductDetails",
@@ -26,20 +26,29 @@ export default defineComponent({
         let ready = ref<boolean>(false);
         let product= ref<any>({});
         let id = route.params.id;
+        let err = ref<string>('');
 
         async function fetchdata(){
-            const res = await fetch('http://localhost:4000/products');
-            const data = await res.json();
-            for(let i=0;i<data.length;i++){
-                if(data[i].id === id){
-                    product.value = data[i];
-                    ready.value=true
-                    break;
+            try{
+                const res = await fetch('http://localhost:4000/products');
+
+                if(!res.ok){
+                    throw new Error(res.statusText);
                 }
+                const data = await res.json();
+                for(let i=0;i<data.length;i++){
+                    if(data[i].id === id){
+                        product.value = data[i];
+                        ready.value=true
+                        break;
+                    }
+                }
+            }catch(error:any){
+                err.value=error
             }
         }
         fetchdata();
-        return {product,ready};
+        return {product,ready,err};
     }
 })
 </script>
@@ -59,6 +68,7 @@ export default defineComponent({
     align-items: center;
     padding: 20px;
     border-radius:10px ;
+    background-color: lightgrey;
 }
 .product-details-left{
     width: 20%;
@@ -69,5 +79,10 @@ export default defineComponent({
     flex-direction: column;
     padding: 20px;
     margin-left:20px ;
+}
+.error{
+    width:95%;
+    display: flex;
+    justify-content: center;
 }
 </style>

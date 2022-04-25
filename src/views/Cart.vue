@@ -59,46 +59,6 @@ export default defineComponent({
 </script>
 
 <style>
-.wishlist-container{
-    width: 100%;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-}
-.product-container{
-    border-radius: 20px;
-    width: 94%;
-    height: 100px;
-    margin: 10px;
-    padding: 20px;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    display: flex;
-    align-items: center;
-}
-.product-left{
-    width: 20%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.product-right{
-    display: flex;
-    width: 78%;
-    justify-content: space-between;
-}
-.product-details{
-    display: flex;
-    flex-direction: column;
-}
-.product-details span{
-    margin-bottom: 5px;
-}
-.delete svg{
- font-size: 20px;    
-}
-.delete svg:hover{
-    cursor: pointer;
-}
 .price{
     display: flex;
     justify-content: center;

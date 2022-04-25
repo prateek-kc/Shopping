@@ -1,7 +1,5 @@
 <template>
-
     <form novalidate="true">
-
         <div><h1> Shopping </h1></div>
 
         <div class="field">
@@ -26,7 +24,6 @@
             <button @click="handleClick"  :disabled="handleDisable()" >Login</button>
         </div>
     </form>
-  
 </template>
 
 <script lang="ts">
@@ -35,7 +32,7 @@ import {  useRouter } from 'vue-router'
 
 export default defineComponent({
     name:'Login',
-    setup(){
+    setup(props,context){
 
         const email = ref<string>('');
         const pass = ref<string>('');
@@ -77,6 +74,7 @@ export default defineComponent({
                 return;
             }
            localStorage.setItem('isLoggedIn','true');
+           context.emit('login');
            router.replace('Home');
        }
 
@@ -98,7 +96,6 @@ export default defineComponent({
 
 <style scoped>
 form{
-    /* border:solid red 2px ; */
     margin-top: 100px;
     width: 40%;
     height: 500px;
@@ -107,6 +104,8 @@ form{
     justify-content: center;
     align-items: center;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    background-color: lightgrey;
+    border-radius: 10px;
 }
 .error{
     color:red;
@@ -125,7 +124,6 @@ form{
     padding: 10px;
     
 }
-
 .field label{
     font-size: 20px;
     margin-bottom: 10px;
@@ -141,6 +139,5 @@ form{
 .field button:hover{
     cursor: pointer;
 }
-
 </style>
 
