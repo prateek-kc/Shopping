@@ -18,13 +18,14 @@
 <script lang="ts">
 import { defineComponent,ref} from "vue"
 import { useRoute } from "vue-router"
+import type products from '../types/Home';
 
 export default defineComponent({
     name:"ProductDetails",
     setup(){
         const route = useRoute();
         let ready = ref<boolean>(false);
-        let product= ref<any>({});
+        let product= ref<products>({id:'',name:'',category:'',price:0});
         let id = route.params.id;
         let err = ref<string>('');
 

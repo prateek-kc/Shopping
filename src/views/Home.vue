@@ -1,7 +1,7 @@
 <template>
 
 <div class="home-container">
-     <div v-for="item in shopdata" :key="item">
+     <div v-for="item in shopdata" :key="item.id">
         <Card :item="item" />
     </div>
     <div v-if="err">
@@ -15,12 +15,13 @@
 import { defineComponent, onMounted, onUpdated, watch,ref } from "vue";
 import Login from './Login.vue';
 import Card from './Card.vue';
+import type product from '../types/Home';
 
 export default defineComponent({
     name:"Home",
     components:{Login,Card},
     setup(){
-        let shopdata=ref<any[]>([]);
+        let shopdata=ref<product[]>([]);
         let err = ref<string>('');
         onMounted(() =>{
                 fetch('http://localhost:4000/products')

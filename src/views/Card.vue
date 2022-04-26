@@ -20,6 +20,7 @@
 import { defineComponent } from "vue";
 import { useRouter } from "vue-router";
 import ProductDetails from "./ProductDetails.vue";
+import type product from '../types/Home';
 
 export default defineComponent({
     name:"Card",
@@ -30,7 +31,7 @@ export default defineComponent({
         let wish = new Array();
         let cart = new Array();
         const router = useRouter();
-        function handleWish(item:any){
+        function handleWish(item:product){
             let curr = localStorage.getItem('wishlist');
             if(curr!=='' && curr!==null){
                var obj = JSON.parse(curr);
@@ -46,7 +47,7 @@ export default defineComponent({
             localStorage.setItem('wishlist',JSON.stringify(wish));
         }
 
-        function handleCart(item:any){
+        function handleCart(item:product){
             let curr = localStorage.getItem('cart');
             console.log("curr"+" "+curr);
             if(curr !== '' && curr !== null){
@@ -63,7 +64,7 @@ export default defineComponent({
             localStorage.setItem('cart',JSON.stringify(cart));
         }
 
-        function handleClick(item:any){
+        function handleClick(item:product){
             const id = item.id;
             router.push({
                 name:'ProductDetails',

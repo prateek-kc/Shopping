@@ -1,6 +1,6 @@
 <template>
     <div class="wishlist-container" v-if="result.length !== 0">
-        <div v-for="product in result" :key="product" class="product-container">
+        <div v-for="product in result" :key="product.id" class="product-container">
             <div class="product-left">
                 <h1>{{product.name}} </h1>
             </div>
@@ -23,11 +23,12 @@
 
 <script lang="ts">
 import {defineComponent,ref} from 'vue';
+import type product from '../types/Home';
 export default defineComponent({
     name:"WishList",
     setup(){
         let list = localStorage.getItem('wishlist');
-        let result= ref<any[]>([]);
+        let result= ref<product[]>([]);
         if(list !== '' && list!== null){
             result.value = JSON.parse(list);
         }
